@@ -3,7 +3,6 @@
 
 > Uma API desenvolvida para alimentar a dashboard do nosso projeto!
 
-### TODO (ENDPOINTS E REPOSITORY (Model))
 
 ## 💻 Pré-requisitos
 
