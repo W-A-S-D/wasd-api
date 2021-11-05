@@ -12,7 +12,7 @@ model User {
   name      String
   email     String
   password  String
-  Acess     Int
+  acess     Int
   avatar    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

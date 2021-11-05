@@ -18,7 +18,7 @@ class CreateUserService {
                     name: nome,
                     email,
                     password: passwordHash,
-                    Acess: acess,
+                    acess: 1,
                     avatar: avatar_url
                 }
             })
