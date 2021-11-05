@@ -4,7 +4,6 @@ let http = require("http");
 let cors = require("cors");
 let socket = require("socket.io");
 
-
 let router = require('./src/routes');
 
 const app = express();
