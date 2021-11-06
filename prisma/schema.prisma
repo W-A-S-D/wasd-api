@@ -3,19 +3,103 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  password  String
-  acess     Int
-  avatar    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Usuario {
+  usuario_id  Int      @id(map: "PK__usuario__2ED7D2AF7A7C5788") @default(autoincrement())
+  fk_empresa  Int
+  nome        String   @db.VarChar(100)
+  email       String   @db.VarChar(100)
+  senha       String   @db.VarChar(30)
+  nivelAcesso Int
+  avatar      String?  @db.VarChar(255)
+  criado      DateTime @default(now())
+  atualizado  DateTime @updatedAt
+  empresa     empresa  @relation("empresaTousuario", fields: [fk_empresa], references: [empresa_id], onUpdate: NoAction, map: "FK__usuario__fk_empr__6FE99F9F")
+  setor       setor[]  @relation("setorTousuario")
 
-  @@map("user")
+  @@map("usuario")
+}
+
+model disco {
+  disco_id   Int         @id(map: "PK__disco__E0E79026CC97FC48") @default(autoincrement())
+  fk_maquina Int
+  nome       String      @db.VarChar(100)
+  volume     Decimal     @db.Decimal(6, 2)
+  maquina    maquina     @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__disco__fk_maquin__7B5B524B")
+  log_disco  log_disco[]
+}
+
+model empresa {
+  empresa_id        Int       @id(map: "PK__empresa__536BE4A2DC8B4587") @default(autoincrement())
+  nome              String    @db.VarChar(100)
+  email_empresarial String?   @db.VarChar(50)
+  cnpj              String    @db.Char(14)
+  logradouro        String    @db.VarChar(100)
+  numero            Int?
+  bairro            String    @db.VarChar(25)
+  cidade            String    @db.VarChar(30)
+  uf                String    @db.Char(2)
+  cep               String    @db.Char(9)
+  telefone          String    @db.VarChar(11)
+  usuario           Usuario[] @relation("empresaTousuario")
+}
+
+model log {
+  log_id      Int         @id(map: "PK__log__9E2397E07E87916B") @default(autoincrement())
+  fk_maquina  Int
+  freq_cpu    Decimal     @db.Decimal(6, 2)
+  uso_ram     Decimal     @db.Decimal(6, 2)
+  temperatura Decimal     @db.Decimal(6, 2)
+  criado      DateTime    @default(now())
+  maquina     maquina     @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__log__fk_maquina__7E37BEF6")
+  log_disco   log_disco[]
+}
+
+model log_disco {
+  fk_log    Int
+  fk_disco  Int
+  uso_disco Decimal @db.Decimal(6, 2)
+  disco     disco   @relation(fields: [fk_disco], references: [disco_id], onUpdate: NoAction, map: "FK__log_disco__fk_di__02084FDA")
+  log       log     @relation(fields: [fk_log], references: [log_id], onUpdate: NoAction, map: "FK__log_disco__fk_lo__01142BA1")
+
+  @@id([fk_log, fk_disco], map: "PK__log_disc__880D6FD98D68052C")
+}
+
+model maquina {
+  maquina_id Int        @id(map: "PK__maquina__2013A8F62826250A") @default(autoincrement())
+  fk_setor   Int
+  nome       String     @db.VarChar(30)
+  so         String     @db.VarChar(15)
+  cpu        String     @db.VarChar(50)
+  ram        Decimal    @db.Decimal(6, 2)
+  gpu        String?    @db.VarChar(50)
+  status     String     @db.VarChar(20)
+  setor      setor      @relation(fields: [fk_setor], references: [setor_id], onUpdate: NoAction, map: "FK__maquina__fk_seto__75A278F5")
+  disco      disco[]
+  log        log[]
+  processo   processo[]
+}
+
+model processo {
+  processo_id Int       @id(map: "PK__processo__E875D844441B7877") @default(autoincrement())
+  fk_maquina  Int
+  nome        String    @db.VarChar(30)
+  status      String    @db.VarChar(30)
+  iniciado    DateTime  @default(now())
+  encerrado   DateTime?
+  maquina     maquina   @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__processo__fk_maq__787EE5A0")
+}
+
+model setor {
+  setor_id    Int       @id(map: "PK__setor__F82C203150143FE3") @default(autoincrement())
+  fk_usuario  Int
+  jogo        String    @db.VarChar(50)
+  avatar_jogo String?   @db.VarChar(255)
+  usuario     Usuario   @relation("setorTousuario", fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__setor__fk_usuari__72C60C4A")
+  maquina     maquina[]
 }

@@ -6,6 +6,7 @@ class CreateUserController {
 
         const service = new CreateUserService();
 
+        console.log(request.body);
         try {
             const result = await service.execute(name, email, password, Acess, avatar);
 

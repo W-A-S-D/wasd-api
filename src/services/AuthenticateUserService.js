@@ -4,7 +4,7 @@ let bcrypt = require("bcryptjs");
 
 class AuthenticateUserService {
     async execute(email, pass) {
-        const user = await prisma.user.findFirst({
+        const user = await prisma.usuario.findFirst({
             where: {
                 email
             }

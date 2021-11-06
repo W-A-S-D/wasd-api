@@ -4,22 +4,26 @@ let bcrypt = require("bcryptjs");
 class CreateUserService {
     async execute(nome, email, pass, acess, avatar_url) {
 
-        let user = await prisma.user.findFirst({
+        let user = await prisma.usuario.findFirst({
             where: {
                 email
             }
-        }) 
+        })
 
-        const passwordHash = await bcrypt.hash(pass, 8)
+        const passwordHash = await bcrypt.hash(pass, 0)
+
 
         if (!user) {
-            user = await prisma.user.create({
+            user = await prisma.usuario.create({
                 data: {
-                    name: nome,
+                    fk_empresa: 1,
+                    nome,
                     email,
-                    password: passwordHash,
-                    acess: 1,
-                    avatar: avatar_url
+                    senha: pass,
+                    nivelAcesso: 1,
+                    avatar: avatar_url,
+                    criado: new Date("2020-03-19T14:21:00+0200"),
+                    atualizado: new Date("2020-03-19T14:21:00+0200")
                 }
             })
         }
