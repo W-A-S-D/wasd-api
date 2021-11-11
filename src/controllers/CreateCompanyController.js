@@ -1,8 +1,10 @@
 let CreateCompanyService = require('../services/CreateCompanyService');
 
-class CreateUserController {
-    async hCompanye(request, response) {
+class CreateCompanyController {
+    async handle(request, response) {
         const { nome, email, cnpj, logradouro, numero, bairro, cidade, uf, cep, telefone } = request.body;
+       
+
 
         const service = new CreateCompanyService();
 
