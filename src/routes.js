@@ -6,8 +6,8 @@ const ensureAuthenticated = require("./middleware/ensureAuthenticated");
 const CreateUserController = require("./controllers/UserController/CreateUserController");
 const CreateCompanyController = require("./controllers/CompanyController/CreateCompanyController");
 const AuthenticateUserController = require("./controllers/UserController/AuthenticateUserController");
-const ListSectorsController = require('./controllers/CompanyController/ListSectorsController');
-const FindSectorByUserController = require("./controllers/MachineController/FindSectorByUserController");
+const ListSectorsController = require('./controllers/SectorController/ListSectorsController');
+const FindSectorByUserController = require("./controllers/SectorController/FindSectorByUserController");
 const ListMachinesBySectorController = require("./controllers/MachineController/ListMachinesBySectorController");
 const ListMachinesByStatusController = require("./controllers/MachineController/ListMachinesByStatusController");
 

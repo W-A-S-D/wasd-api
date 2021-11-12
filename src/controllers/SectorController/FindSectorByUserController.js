@@ -1,4 +1,4 @@
-let FindSectorByUserService = require('../services/FindSectorByUserService');
+let FindSectorByUserService = require('../../services/SectorService/FindSectorByUserService');
 
 
 

@@ -1,4 +1,4 @@
-const ListMachinesService = require("../services/ListMachinesService");
+const ListMachinesService = require("../../services/MachineService/ListMachinesService");
 
 
 class ListMachinesByStatusController {

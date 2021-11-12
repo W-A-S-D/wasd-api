@@ -1,4 +1,4 @@
-let AuthenticateUserService = require('../services/AuthenticateUserService');
+let AuthenticateUserService = require('../../services/UserService/AuthenticateUserService');
 
 class AuthenticateUserController {
     async handle(request, response) {

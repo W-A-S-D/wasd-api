@@ -1,4 +1,4 @@
-let prisma = require("../prisma")
+let prisma = require("../../prisma")
 let { sign } = require("jsonwebtoken")
 let bcrypt = require("bcryptjs");
 

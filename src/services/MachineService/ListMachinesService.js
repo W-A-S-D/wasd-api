@@ -1,9 +1,9 @@
-const prisma = require("../prisma");
+const prisma = require("../../prisma");
 
 class ListMachinesService {
     async execute(idEmpresa) {
         const machinesList = await prisma.maquina.findMany({
-            where : {
+            where: {
                 setor: {
                     usuario: {
                         fk_empresa: idEmpresa
