@@ -32,4 +32,4 @@ class CreateUserService {
     }
 }
 
-module.exports = CreateUserService
+module.exports = CreateUserService;

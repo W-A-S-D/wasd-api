@@ -31,4 +31,4 @@ class AuthenticateUserService {
     }
 }
 
-module.exports = AuthenticateUserService
+module.exports = AuthenticateUserService;
