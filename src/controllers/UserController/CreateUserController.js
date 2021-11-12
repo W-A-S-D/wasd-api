@@ -1,4 +1,4 @@
-let CreateUserService = require('../services/CreateUserService');
+let CreateUserService = require('../../services/UserService/CreateUserService');
 
 class CreateUserController {
     async handle(request, response) {

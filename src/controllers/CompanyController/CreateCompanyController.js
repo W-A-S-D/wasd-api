@@ -1,9 +1,9 @@
-let CreateCompanyService = require('../services/CreateCompanyService');
+let CreateCompanyService = require('../../services/CompanyService/CreateCompanyService');
 
 class CreateCompanyController {
     async handle(request, response) {
         const { nome, email, cnpj, logradouro, numero, bairro, cidade, uf, cep, telefone } = request.body;
-       
+
 
 
         const service = new CreateCompanyService();

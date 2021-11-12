@@ -3,13 +3,13 @@ let router = express.Router();
 
 const ensureAuthenticated = require("./middleware/ensureAuthenticated");
 
-const CreateUserController = require("./controllers/CreateUserController");
-const CreateCompanyController = require("./controllers/CreateCompanyController");
-const AuthenticateUserController = require("./controllers/AuthenticateUserController");
-const ListSectorsController = require('./controllers/ListSectorsController');
-const FindSectorByUserController = require("./controllers/FindSectorByUserController");
-const ListMachinesBySectorController = require("./controllers/ListMachinesBySectorController");
-const ListMachinesByStatusController = require("./controllers/ListMachinesByStatusController");
+const CreateUserController = require("./controllers/UserController/CreateUserController");
+const CreateCompanyController = require("./controllers/CompanyController/CreateCompanyController");
+const AuthenticateUserController = require("./controllers/UserController/AuthenticateUserController");
+const ListSectorsController = require('./controllers/CompanyController/ListSectorsController');
+const FindSectorByUserController = require("./controllers/MachineController/FindSectorByUserController");
+const ListMachinesBySectorController = require("./controllers/MachineController/ListMachinesBySectorController");
+const ListMachinesByStatusController = require("./controllers/MachineController/ListMachinesByStatusController");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });

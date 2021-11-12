@@ -1,4 +1,4 @@
-let prisma = require("../prisma")
+let prisma = require("../../prisma")
 let bcrypt = require("bcryptjs");
 
 class CreateUserService {
