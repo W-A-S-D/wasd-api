@@ -10,6 +10,7 @@ const ListSectorsController = require('./controllers/SectorController/ListSector
 const FindSectorByUserController = require("./controllers/SectorController/FindSectorByUserController");
 const ListMachinesBySectorController = require("./controllers/MachineController/ListMachinesBySectorController");
 const ListMachinesByStatusController = require("./controllers/MachineController/ListMachinesByStatusController");
+const CreateSectorController = require("./controllers/SectorController/CreateSectorController");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -18,6 +19,7 @@ router.get('/', function(req, res, next) {
 router.post('/create', new CreateUserController().handle)
 router.post('/create-company', new CreateCompanyController().handle)
 router.post('/authenticate', new AuthenticateUserController().handle)
+router.post('/sectors/create', new CreateSectorController().handle);
 router.get('/sectors', new ListSectorsController().handle)
 router.get('/sectors/:id', new FindSectorByUserController().handle)
 router.get('/machines/sector/:idSetor', new ListMachinesBySectorController().handle)
