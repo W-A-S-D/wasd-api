@@ -13,6 +13,9 @@ const ListMachinesByStatusController = require("./controllers/MachineController/
 const CreateSectorController = require("./controllers/SectorController/CreateSectorController");
 const ListUsersController = require("./controllers/UserController/ListUsersController");
 const ListSectorsByCompanyController = require("./controllers/SectorController/ListSectorsByCompanyController");
+const DeleteUserController = require("./controllers/UserController/DeleteUserController");
+const UpdateUserController = require("./controllers/UserController/UpdateUserController");
+const ListUsersByCompanyController = require("./controllers/UserController/ListUsersByCompanyController");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -20,15 +23,18 @@ router.get('/', function(req, res, next) {
 
 //users
 router.get('/users', new ListUsersController().handle);
-
+router.get('/users/company/:fkCompany', new ListUsersByCompanyController().handle);
 router.post('/create', new CreateUserController().handle)
+router.post('/update/:idUser', new UpdateUserController().handle)
 router.post('/authenticate', new AuthenticateUserController().handle)
+router.delete('/delete/:idUser', new DeleteUserController().handle)
+
 
 // sectors
 router.get('/sectors', new ListSectorsController().handle)
 router.get('/sectors/:id', new FindSectorByUserController().handle)
 
-router.post('/sectors/create', new CreateSectorController().handle);
+router.post('/sectors/create', new CreateSectorController().handle)
 router.post('/sectors', new ListSectorsByCompanyController().handle)
 
 
