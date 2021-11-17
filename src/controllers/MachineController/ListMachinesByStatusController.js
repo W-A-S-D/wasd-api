@@ -3,12 +3,12 @@ const ListMachinesService = require("../../services/MachineService/ListMachinesS
 
 class ListMachinesByStatusController {
     async handle(request, response) {
-        const { idEmpresa } = request.params;
+        const { user_id } = request;
 
         const service = new ListMachinesService;
 
         try {
-            const result = await service.execute(parseInt(idEmpresa));
+            const result = await service.execute(parseInt(v));
 
             return response.json(result);
         } catch (error) {

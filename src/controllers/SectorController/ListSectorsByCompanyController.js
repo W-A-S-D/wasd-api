@@ -4,12 +4,12 @@ let ListSectorsByCompanyService = require('../../services/SectorService/ListSect
 class ListSectorsByCompanyController {
     handle = async(request, response) => {
 
-        const { fk_empresa } = request.body;
+        const { user_id } = request;
 
         const service = new ListSectorsByCompanyService();
 
         try {
-            const result = await service.execute(fk_empresa);
+            const result = await service.execute(parseInt(user_id));
 
             return response.json(result);
         } catch (error) {

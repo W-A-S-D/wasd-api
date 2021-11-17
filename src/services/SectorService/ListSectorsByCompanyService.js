@@ -1,13 +1,15 @@
 let prisma = require("../../prisma")
-
+const FindUserByIdService = require("../UserService/FindUserByIdService");
 
 class ListSectorsByCompanyService {
-    execute = async(fkCompany) => {
+    execute = async(user_id) => {
+        const user = await new FindUserByIdService().execute(parseInt(user_id));
+
         const sectorsList = await prisma.setor.findMany({
             where: {
                 usuario: {
                     empresa: {
-                        empresa_id: fkCompany
+                        empresa_id: user.fk_empresa
                     }
                 }
             },

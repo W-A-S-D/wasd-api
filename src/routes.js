@@ -16,6 +16,7 @@ const ListSectorsByCompanyController = require("./controllers/SectorController/L
 const DeleteUserController = require("./controllers/UserController/DeleteUserController");
 const UpdateUserController = require("./controllers/UserController/UpdateUserController");
 const ListUsersByCompanyController = require("./controllers/UserController/ListUsersByCompanyController");
+const FindUserByIdController = require("./controllers/UserController/FindUserByIdController");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -23,25 +24,23 @@ router.get('/', function(req, res, next) {
 
 //users
 router.get('/users', new ListUsersController().handle);
-router.get('/users/company/:fkCompany', new ListUsersByCompanyController().handle);
+router.get('/users/company', ensureAuthenticated, new ListUsersByCompanyController().handle);
+router.get('/user', ensureAuthenticated, new FindUserByIdController().handle);
 router.post('/create', new CreateUserController().handle)
-router.post('/update/:idUser', new UpdateUserController().handle)
+router.post('/update', ensureAuthenticated, new UpdateUserController().handle)
 router.post('/authenticate', new AuthenticateUserController().handle)
-router.delete('/delete/:idUser', new DeleteUserController().handle)
-
+router.delete('/delete/:idUser', ensureAuthenticated, new DeleteUserController().handle)
 
 // sectors
 router.get('/sectors', new ListSectorsController().handle)
-router.get('/sectors/:id', new FindSectorByUserController().handle)
+router.get('/sectors/user', ensureAuthenticated, new FindSectorByUserController().handle)
+router.get('/sectors/company', ensureAuthenticated, new ListSectorsByCompanyController().handle)
 
-router.post('/sectors/create', new CreateSectorController().handle)
-router.post('/sectors', new ListSectorsByCompanyController().handle)
-
+router.post('/sectors/create', ensureAuthenticated, new CreateSectorController().handle)
 
 //machines
 router.get('/machines/sector/:idSetor', new ListMachinesBySectorController().handle)
-router.get('/machines/:idEmpresa', new ListMachinesByStatusController().handle)
-
+router.get('/machines/', ensureAuthenticated, new ListMachinesByStatusController().handle)
 
 //company 
 router.post('/create-company', new CreateCompanyController().handle)

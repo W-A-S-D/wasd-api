@@ -2,12 +2,12 @@ const ListUsersByCompanyService = require('../../services/UserService/ListUsersB
 
 class ListUsersByCompanyController {
      async handle(request, response) {
-        const { fkCompany } = request.params;
+        const { user_id } = request;
 
         const service = new ListUsersByCompanyService();
 
         try {
-            const result = await service.execute(parseInt(fkCompany));
+            const result = await service.execute(parseInt(user_id));
 
             return response.json(result);
         } catch (error) {

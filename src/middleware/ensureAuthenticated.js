@@ -14,7 +14,7 @@ function ensureAuthenticated(request, response, next) {
     try {
         const { sub } = verify(jwtToken, process.env.JWT_SECRET)
 
-        request.nome = sub;
+        request.user_id = sub;
 
         return next()
     } catch (error) {
