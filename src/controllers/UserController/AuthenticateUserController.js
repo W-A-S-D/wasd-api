@@ -7,9 +7,9 @@ class AuthenticateUserController {
         const service = new AuthenticateUserService();
 
         try {
-            const token = await service.execute(email, password)
+            const result = await service.execute(email, password)
 
-            return response.json({ token: token })
+            return response.json(result)
         } catch (error) {
             return response.status(401).json({ error: error.message })
         }
