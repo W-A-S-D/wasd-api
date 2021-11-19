@@ -17,15 +17,18 @@ const DeleteUserController = require("./controllers/UserController/DeleteUserCon
 const UpdateUserController = require("./controllers/UserController/UpdateUserController");
 const ListUsersByCompanyController = require("./controllers/UserController/ListUsersByCompanyController");
 const FindUserByIdController = require("./controllers/UserController/FindUserByIdController");
+const ListLogByMachineController = require("./controllers/LogController/ListLogByMachineController");
+const ListLogDiscoByLogController = require("./controllers/LogController/ListLogDiscoByLogController");
+const ListDiscoByMachineController = require("./controllers/MachineController/ListDiscoByMachinesController");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
 //users
-router.get('/users', new ListUsersController().handle);
-router.get('/users/company', ensureAuthenticated, new ListUsersByCompanyController().handle);
-router.get('/user', ensureAuthenticated, new FindUserByIdController().handle);
+router.get('/users', new ListUsersController().handle)
+router.get('/users/company', ensureAuthenticated, new ListUsersByCompanyController().handle)
+router.get('/user', ensureAuthenticated, new FindUserByIdController().handle)
 router.post('/create', new CreateUserController().handle)
 router.post('/update', ensureAuthenticated, new UpdateUserController().handle)
 router.post('/authenticate', new AuthenticateUserController().handle)
@@ -41,6 +44,11 @@ router.post('/sectors/create', ensureAuthenticated, new CreateSectorController()
 //machines
 router.get('/machines/sector/:idSetor', new ListMachinesBySectorController().handle)
 router.get('/machines/', ensureAuthenticated, new ListMachinesByStatusController().handle)
+router.get('/discos/:idMaquina', ensureAuthenticated, new ListDiscoByMachineController().handle)
+
+//log
+router.get('/log/:idMaquina', ensureAuthenticated, new ListLogByMachineController().handle)
+router.get('/logDisco/:idLog', ensureAuthenticated, new ListLogDiscoByLogController().handle)
 
 //company 
 router.post('/create-company', new CreateCompanyController().handle)

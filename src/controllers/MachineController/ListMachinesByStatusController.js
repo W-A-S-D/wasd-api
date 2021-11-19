@@ -5,10 +5,10 @@ class ListMachinesByStatusController {
     async handle(request, response) {
         const { user_id } = request;
 
-        const service = new ListMachinesService;
+        const service = new ListMachinesService();
 
         try {
-            const result = await service.execute(parseInt(v));
+            const result = await service.execute(parseInt(user_id));
 
             return response.json(result);
         } catch (error) {

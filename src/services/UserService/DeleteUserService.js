@@ -7,7 +7,7 @@ class DeleteUserService {
                 usuario_id: idUser
             },
             data: {
-                nivelAcesso: 2
+                nivelAcesso: 0
             }
         })
 
