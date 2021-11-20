@@ -1,7 +1,7 @@
 let prisma = require("../../prisma")
 let bcrypt = require("bcryptjs");
 
-class CreateUserService {
+class CreateFuncService {
     async execute(fk_empresa, nome, email, pass) {
 
         let user = await prisma.usuario.findFirst({
@@ -19,7 +19,7 @@ class CreateUserService {
                     nome,
                     email,
                     senha: passwordHash,
-                    nivelAcesso: 1,
+                    nivelAcesso: 2,
                     avatar: null,
                     criado: new Date("2020-03-19T14:21:00+0200"),
                     atualizado: new Date("2020-03-19T14:21:00+0200")
@@ -31,4 +31,4 @@ class CreateUserService {
     }
 }
 
-module.exports = CreateUserService;
+module.exports = CreateFuncService;

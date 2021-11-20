@@ -20,6 +20,7 @@ const FindUserByIdController = require("./controllers/UserController/FindUserByI
 const ListLogByMachineController = require("./controllers/LogController/ListLogByMachineController");
 const ListLogDiscoByLogController = require("./controllers/LogController/ListLogDiscoByLogController");
 const ListDiscoByMachineController = require("./controllers/MachineController/ListDiscoByMachinesController");
+const CreateFuncController = require("./controllers/UserController/CreateFuncController");
 
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -30,6 +31,7 @@ router.get('/users', new ListUsersController().handle)
 router.get('/users/company', ensureAuthenticated, new ListUsersByCompanyController().handle)
 router.get('/user', ensureAuthenticated, new FindUserByIdController().handle)
 router.post('/create', new CreateUserController().handle)
+router.post('/create/func', ensureAuthenticated, new CreateFuncController().handle)
 router.post('/update', ensureAuthenticated, new UpdateUserController().handle)
 router.post('/authenticate', new AuthenticateUserController().handle)
 router.delete('/delete/:idUser', ensureAuthenticated, new DeleteUserController().handle)
@@ -51,7 +53,7 @@ router.get('/log/:idMaquina', ensureAuthenticated, new ListLogByMachineControlle
 router.get('/logDisco/:idLog', ensureAuthenticated, new ListLogDiscoByLogController().handle)
 
 //company 
-router.post('/create-company', new CreateCompanyController().handle)
+router.post('/create/company', new CreateCompanyController().handle)
 
 
 module.exports = router;
