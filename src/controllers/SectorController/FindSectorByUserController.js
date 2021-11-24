@@ -1,15 +1,15 @@
-let FindSectorByUserService = require('../services/FindSectorByUserService');
+let FindSectorByUserService = require('../../services/SectorService/FindSectorByUserService');
 
 
 
 class FindSectorByUserController {
     handle = async(request, response) => {
-        const { id } = request.params;
+        const { user_id } = request;
 
         const service = new FindSectorByUserService();
 
         try {
-            const result = await service.execute(parseInt(id));
+            const result = await service.execute(parseInt(user_id));
 
             return response.json(result);
         } catch (error) {

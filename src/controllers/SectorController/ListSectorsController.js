@@ -1,4 +1,4 @@
-let ListSectorsService = require('../services/ListSectorsService');
+let ListSectorsService = require('../../services/SectorService/ListSectorsService');
 
 
 class ListSectorsController {

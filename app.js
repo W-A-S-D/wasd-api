@@ -8,9 +8,9 @@ let router = require('./src/routes');
 
 const app = express();
 app.use(cors());
+app.use('/uploads', express.static('uploads'))
 
 const serverHttp = http.createServer(app);
-
 
 const io = new socket.Server(serverHttp, {
     cors: {

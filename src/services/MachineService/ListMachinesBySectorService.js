@@ -1,4 +1,4 @@
-const prisma = require("../prisma");
+const prisma = require("../../prisma");
 
 class ListMachinesBySectorService {
     async execute(idSetor) {

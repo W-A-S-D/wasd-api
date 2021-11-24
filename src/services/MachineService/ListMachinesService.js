@@ -1,12 +1,15 @@
-const prisma = require("../prisma");
+const prisma = require("../../prisma");
+const FindUserByIdService = require("../UserService/FindUserByIdService");
 
 class ListMachinesService {
-    async execute(idEmpresa) {
+    async execute(user_id) {
+        const user = await new FindUserByIdService().execute(user_id);
+
         const machinesList = await prisma.maquina.findMany({
-            where : {
+            where: {
                 setor: {
                     usuario: {
-                        fk_empresa: idEmpresa
+                        fk_empresa: user.fk_empresa
                     }
                 }
             }

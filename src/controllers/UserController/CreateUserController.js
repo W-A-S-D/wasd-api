@@ -1,14 +1,14 @@
-let CreateUserService = require('../services/CreateUserService');
+let CreateUserService = require('../../services/UserService/CreateUserService');
 
 class CreateUserController {
     async handle(request, response) {
-        const { name, email, password, Acess, avatar } = request.body;
+        const { fk_empresa, nome, email, pass } = request.body;
 
         const service = new CreateUserService();
 
         console.log(request.body);
         try {
-            const result = await service.execute(name, email, password, Acess, avatar);
+            const result = await service.execute(fk_empresa, nome, email, pass);
 
             return response.json(result);
         } catch (error) {
