@@ -7,8 +7,9 @@ class ListUsersByCompanyService {
 
         const usersList = await prisma.usuario.findMany({
             where: {
-                fk_empresa: user.fk_empresa
-            }
+                fk_empresa: user.fk_empresa,
+                nivelAcesso: 2
+            },
         });
 
         if (!usersList) {
