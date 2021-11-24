@@ -4,7 +4,9 @@
     "description": "wasd dashboard api",
     "main": "app.js",
     "scripts": {
-        "dev": "node ./src/server.js"
+        "dev": "node ./src/server.js",
+        "start": "node ./src/server.js",
+        "postinstall": "npm install"
     },
     "author": "wasd",
     "license": "ISC",
