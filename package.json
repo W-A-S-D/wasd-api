@@ -2,11 +2,7 @@
     "name": "wasd-api",
     "version": "1.0.0",
     "description": "wasd dashboard api",
-    "scripts": {
-        "dev": "node ./src/server.js",
-        "start": "node ./src/server.js",
-        "postinstall": "npm install"
-    },
+    "main": "app.js",
     "author": "wasd",
     "license": "ISC",
     "dependencies": {
@@ -22,5 +18,10 @@
     },
     "devDependencies": {
         "prisma": "^3.4.1"
+    },
+    "scripts": {
+        "dev": "node ./src/server.js",
+        "start": "node ./src/server.js",
+        "postinstall": "npm install"
     }
 }
