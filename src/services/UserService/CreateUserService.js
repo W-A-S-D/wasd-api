@@ -19,10 +19,7 @@ class CreateUserService {
                     nome,
                     email,
                     senha: passwordHash,
-                    nivelAcesso: 1,
-                    avatar: null,
-                    criado: new Date("2020-03-19T14:21:00+0200"),
-                    atualizado: new Date("2020-03-19T14:21:00+0200")
+                    nivelAcesso: 1
                 }
             })
         }
