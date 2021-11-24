@@ -2,7 +2,6 @@
     "name": "wasd-api",
     "version": "1.0.0",
     "description": "wasd dashboard api",
-    "main": "app.js",
     "scripts": {
         "dev": "node ./src/server.js",
         "start": "node ./src/server.js",
