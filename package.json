@@ -21,7 +21,6 @@
     },
     "scripts": {
         "dev": "node ./src/server.js",
-        "start": "node ./src/server.js",
-        "postinstall": "npm install"
+        "start": "node ./src/server.js"
     }
 }
