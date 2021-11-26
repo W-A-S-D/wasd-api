@@ -39,6 +39,7 @@ const ListLogDiscoByLogController = require("./controllers/LogController/ListLog
 const ListDiscoByMachineController = require("./controllers/MachineController/ListDiscoByMachinesController");
 const CreateFuncController = require("./controllers/UserController/CreateFuncController");
 const ListMachinesByIdController = require("./controllers/MachineController/ListMachineByIdController");
+const ListRequestController = require("./controllers/RequestController/ListRequestController");
 
 router.get("/", function(req, res, next) {
     res.status(200).send({
@@ -130,5 +131,10 @@ router.get(
 
 //company
 router.post("/create/company", new CreateCompanyController().handle);
+
+//requests
+router.get('/requests', new ListRequestController().handle);
+
+
 
 module.exports = router;

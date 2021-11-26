@@ -7,26 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-<<<<<<< HEAD
-=======
-model Usuario {
-  usuario_id  Int       @id(map: "PK__usuario__2ED7D2AF82F25FFB") @default(autoincrement())
-  fk_empresa  Int
-  nome        String    @db.VarChar(100)
-  email       String    @db.VarChar(100)
-  senha       String    @db.VarChar(255)
-  nivelAcesso Int
-  avatar      String?   @db.VarChar(255)
-  criado      DateTime? @default(now(), map: "DF__usuario__criado__1EA48E88")
-  atualizado  DateTime? @updatedAt
-  empresa     empresa   @relation("empresaTousuario", fields: [fk_empresa], references: [empresa_id], onUpdate: NoAction, map: "FK__usuario__fk_empr__1F98B2C1")
-  pedido      pedido[]  @relation("pedidoTousuario")
-  setor       setor[]   @relation("setorTousuario")
-
-  @@map("usuario")
-}
-
->>>>>>> dev
 model disco {
   disco_id   Int         @id(map: "PK__disco__E0E790268C4678AB") @default(autoincrement())
   fk_maquina Int
@@ -111,7 +91,6 @@ model setor {
   fk_usuario  Int
   jogo        String    @db.VarChar(50)
   avatar_jogo String?   @db.VarChar(255)
-<<<<<<< HEAD
   usuario     usuario   @relation(fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__setor__fk_usuari__22751F6C")
   maquina     maquina[]
 }
@@ -129,16 +108,4 @@ model usuario {
   empresa     empresa   @relation(fields: [fk_empresa], references: [empresa_id], onUpdate: NoAction, map: "FK__usuario__fk_empr__1F98B2C1")
   pedido      pedido[]
   setor       setor[]
-=======
-  usuario     Usuario   @relation("setorTousuario", fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__setor__fk_usuari__22751F6C")
-  maquina     maquina[]
-}
-
-model pedido {
-  pedido_id  Int     @id(map: "PK__pedido__CBE76076FB8415A9") @default(autoincrement())
-  hostname   String  @db.VarChar(25)
-  status     Int
-  fk_usuario Int
-  usuario    Usuario @relation("pedidoTousuario", fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__pedido__fk_usuar__58D1301D")
->>>>>>> dev
 }
