@@ -2,12 +2,12 @@ const ListLogDiscoByLogService = require("../../services/LogService/ListLogDisco
 
 class ListLogDiscoByLogController {
     async handle(request, response) {
-        const { idLog } = request.params;
+        const { idLog, idDisco } = request.params;
 
         const service = new ListLogDiscoByLogService();
 
         try {
-            const result = await service.execute(parseInt(idLog));
+            const result = await service.execute(parseInt(idLog), parseInt(idDisco));
 
             return response.json(result);
         } catch (error) {

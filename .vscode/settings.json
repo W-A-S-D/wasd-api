@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/90fb9878-1404-4c93-b345-05fffc6d4bfa/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/projeto-api-wasd",
+    "appService.deploySubpath": "."
+}

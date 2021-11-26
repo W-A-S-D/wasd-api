@@ -1,10 +1,11 @@
 const prisma = require("../../prisma");
 
 class ListLogDiscoByLogService {
-    async execute(idLog) {
-        const logs = await prisma.log_disco.findMany({
+    async execute(idLog, idDisco) {
+        const logs = await prisma.log_disco.findFirst({
             where: {
-                fk_log: idLog
+                fk_log: idLog,
+                fk_disco: idDisco
             },
             include: {
                 disco: true

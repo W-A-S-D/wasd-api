@@ -37,6 +37,7 @@ const ListLogByMachineController = require("./controllers/LogController/ListLogB
 const ListLogDiscoByLogController = require("./controllers/LogController/ListLogDiscoByLogController");
 const ListDiscoByMachineController = require("./controllers/MachineController/ListDiscoByMachinesController");
 const CreateFuncController = require("./controllers/UserController/CreateFuncController");
+const ListMachinesByIdController = require("./controllers/MachineController/ListMachineByIdController");
 
 router.get("/", function (req, res, next) {
   res.status(200).send({
@@ -61,7 +62,7 @@ router.post(
 );
 router.post("/update", ensureAuthenticated, new UpdateUserController().handle);
 router.post("/authenticate", new AuthenticateUserController().handle);
-router.delete(
+router.put(
   "/delete/:idUser",
   ensureAuthenticated,
   new DeleteUserController().handle
@@ -92,6 +93,7 @@ router.get(
   "/machines/sector/:idSetor",
   new ListMachinesBySectorController().handle
 );
+
 router.get(
   "/machines/",
   ensureAuthenticated,
@@ -102,6 +104,11 @@ router.get(
   ensureAuthenticated,
   new ListDiscoByMachineController().handle
 );
+router.get(
+  "/machine/:idMaquina",
+  ensureAuthenticated,
+  new ListMachinesByIdController().handle
+);
 
 //log
 router.get(
@@ -110,7 +117,7 @@ router.get(
   new ListLogByMachineController().handle
 );
 router.get(
-  "/logDisco/:idLog",
+  "/logDisco/:idLog&:idDisco",
   ensureAuthenticated,
   new ListLogDiscoByLogController().handle
 );
