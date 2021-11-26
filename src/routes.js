@@ -3,19 +3,19 @@ let router = express.Router();
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+    destination: function(req, file, cb) {
+        cb(null, "./uploads");
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    },
 });
 
 const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-  }
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5,
+    }
 });
 const ensureAuthenticated = require("./middleware/ensureAuthenticated");
 
@@ -28,6 +28,7 @@ const ListMachinesBySectorController = require("./controllers/MachineController/
 const ListMachinesByStatusController = require("./controllers/MachineController/ListMachinesByStatusController");
 const CreateSectorController = require("./controllers/SectorController/CreateSectorController");
 const ListUsersController = require("./controllers/UserController/ListUsersController");
+const ListUsersWithoutSector = require("./controllers/UserController/ListUsersWithoutSectorController");
 const ListSectorsByCompanyController = require("./controllers/SectorController/ListSectorsByCompanyController");
 const DeleteUserController = require("./controllers/UserController/DeleteUserController");
 const UpdateUserController = require("./controllers/UserController/UpdateUserController");
@@ -39,70 +40,87 @@ const ListDiscoByMachineController = require("./controllers/MachineController/Li
 const CreateFuncController = require("./controllers/UserController/CreateFuncController");
 const ListMachinesByIdController = require("./controllers/MachineController/ListMachineByIdController");
 
+<<<<<<< HEAD
 router.get("/", function (req, res, next) {
   res.status(200).send({
     title: "Node Express API",
     version: "0.0.1"
   });
+=======
+router.get("/", function(req, res, next) {
+    res.render("index", { title: "Express" });
+>>>>>>> dev
 });
 
 //users
 router.get("/users", new ListUsersController().handle);
 router.get(
-  "/users/company",
-  ensureAuthenticated,
-  new ListUsersByCompanyController().handle
+    "/users/company",
+    ensureAuthenticated,
+    new ListUsersByCompanyController().handle
 );
 router.get("/user", ensureAuthenticated, new FindUserByIdController().handle);
 router.post("/create", new CreateUserController().handle);
+router.get('/users/nosector', new ListUsersWithoutSector().handle);
 router.post(
-  "/create/func",
-  ensureAuthenticated,
-  new CreateFuncController().handle
+    "/create/func",
+    ensureAuthenticated,
+    new CreateFuncController().handle
 );
 router.post("/update", ensureAuthenticated, new UpdateUserController().handle);
 router.post("/authenticate", new AuthenticateUserController().handle);
+<<<<<<< HEAD
 router.put(
   "/delete/:idUser",
   ensureAuthenticated,
   new DeleteUserController().handle
+=======
+router.delete(
+    "/delete/:idUser",
+    ensureAuthenticated,
+    new DeleteUserController().handle
+>>>>>>> dev
 );
 
 // sectors
 router.get("/sectors", new ListSectorsController().handle);
 router.get(
-  "/sectors/user",
-  ensureAuthenticated,
-  new FindSectorByUserController().handle
+    "/sectors/user",
+    ensureAuthenticated,
+    new FindSectorByUserController().handle
 );
 router.get(
-  "/sectors/company",
-  ensureAuthenticated,
-  new ListSectorsByCompanyController().handle
+    "/sectors/company",
+    ensureAuthenticated,
+    new ListSectorsByCompanyController().handle
 );
 
+
+
 router.post(
-  "/sectors/create",
-  upload.single("productImage"),
-  ensureAuthenticated,
-  new CreateSectorController().handle
+    "/sectors/create",
+    upload.single("productImage"),
+    ensureAuthenticated,
+    new CreateSectorController().handle
 );
+
+
 
 //machines
 router.get(
-  "/machines/sector/:idSetor",
-  new ListMachinesBySectorController().handle
+    "/machines/sector/:idSetor",
+    new ListMachinesBySectorController().handle
 );
 
 router.get(
-  "/machines/",
-  ensureAuthenticated,
-  new ListMachinesByStatusController().handle
+    "/machines/",
+    ensureAuthenticated,
+    new ListMachinesByStatusController().handle
 );
 router.get(
-  "/discos/:idMaquina",
-  ensureAuthenticated,
-  new ListDiscoByMachineController().handle
+    "/discos/:idMaquina",
+    ensureAuthenticated,
+    new ListDiscoByMachineController().handle
 );
 router.get(
   "/machine/:idMaquina",
@@ -112,14 +130,20 @@ router.get(
 
 //log
 router.get(
-  "/log/:idMaquina",
-  ensureAuthenticated,
-  new ListLogByMachineController().handle
+    "/log/:idMaquina",
+    ensureAuthenticated,
+    new ListLogByMachineController().handle
 );
 router.get(
+<<<<<<< HEAD
   "/logDisco/:idLog&:idDisco",
   ensureAuthenticated,
   new ListLogDiscoByLogController().handle
+=======
+    "/logDisco/:idLog",
+    ensureAuthenticated,
+    new ListLogDiscoByLogController().handle
+>>>>>>> dev
 );
 
 //company

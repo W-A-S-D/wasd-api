@@ -5,8 +5,13 @@
     "main": "app.js",
     "author": "wasd",
     "license": "ISC",
+<<<<<<< HEAD
     "dependencies": { 
         "@prisma/client": "^3.4.1",
+=======
+    "dependencies": {
+        "@prisma/client": "^3.5.0",
+>>>>>>> dev
         "axios": "^0.23.0",
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
@@ -17,10 +22,14 @@
         "socket.io": "^4.3.0"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "prisma": "^3.4.1"
     },
     "scripts": {
         "dev": "node ./src/server.js",
         "start": "node ./src/server.js"
+=======
+        "prisma": "^3.5.0"
+>>>>>>> dev
     }
 }
