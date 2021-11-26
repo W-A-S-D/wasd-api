@@ -40,16 +40,11 @@ const ListDiscoByMachineController = require("./controllers/MachineController/Li
 const CreateFuncController = require("./controllers/UserController/CreateFuncController");
 const ListMachinesByIdController = require("./controllers/MachineController/ListMachineByIdController");
 
-<<<<<<< HEAD
-router.get("/", function (req, res, next) {
-  res.status(200).send({
-    title: "Node Express API",
-    version: "0.0.1"
-  });
-=======
 router.get("/", function(req, res, next) {
-    res.render("index", { title: "Express" });
->>>>>>> dev
+    res.status(200).send({
+        title: "Node Express API",
+        version: "0.0.1"
+    });
 });
 
 //users
@@ -69,17 +64,10 @@ router.post(
 );
 router.post("/update", ensureAuthenticated, new UpdateUserController().handle);
 router.post("/authenticate", new AuthenticateUserController().handle);
-<<<<<<< HEAD
 router.put(
-  "/delete/:idUser",
-  ensureAuthenticated,
-  new DeleteUserController().handle
-=======
-router.delete(
     "/delete/:idUser",
     ensureAuthenticated,
     new DeleteUserController().handle
->>>>>>> dev
 );
 
 // sectors
@@ -123,9 +111,9 @@ router.get(
     new ListDiscoByMachineController().handle
 );
 router.get(
-  "/machine/:idMaquina",
-  ensureAuthenticated,
-  new ListMachinesByIdController().handle
+    "/machine/:idMaquina",
+    ensureAuthenticated,
+    new ListMachinesByIdController().handle
 );
 
 //log
@@ -135,15 +123,9 @@ router.get(
     new ListLogByMachineController().handle
 );
 router.get(
-<<<<<<< HEAD
-  "/logDisco/:idLog&:idDisco",
-  ensureAuthenticated,
-  new ListLogDiscoByLogController().handle
-=======
-    "/logDisco/:idLog",
+    "/logDisco/:idLog&:idDisco",
     ensureAuthenticated,
     new ListLogDiscoByLogController().handle
->>>>>>> dev
 );
 
 //company
