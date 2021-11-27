@@ -58,14 +58,14 @@ ou
 node run dev
 ```
 
-## Rodando a api com yarn:
+## ✔ Rodando a api com yarn:
 
 ```
 yarn dev
 ```
 
 
-Não se esqueça de verificar se o arquivo .env está no seu repositório!!
+‼ Não se esqueça de verificar se o arquivo .env está no seu repositório!!
 
 ## 📫 Contribuindo para o projeto
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
