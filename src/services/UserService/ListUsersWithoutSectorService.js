@@ -11,7 +11,9 @@ class ListUsersWithoutSectorService {
             where: {
                 setor: {
                     none: {},
-                }
+                },
+                nivelAcesso: 2
+
             }
         });
 
