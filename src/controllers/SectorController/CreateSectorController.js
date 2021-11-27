@@ -2,15 +2,13 @@ const CreateSectorService = require("../../services/SectorService/CreateSectorSe
 
 class CreateSectorController {
     async handle(request, response) {
-        const image = request.file;
-        const { fk_usuario, jogo } = request.body;
-        console.log(image)
-        console.log(request.body)
+        const { jogo, fk_usuario } = request.body;
 
         const service = new CreateSectorService();
 
         try {
-            const result = await service.execute(parseInt(fk_usuario), jogo, image.path);
+
+            const result = await service.execute(parseInt(fk_usuario), jogo);
 
             return response.json(result);
         } catch (error) {

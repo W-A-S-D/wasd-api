@@ -2,7 +2,7 @@ let prisma = require("../../prisma")
 
 
 class CreateSectorService {
-    execute = async(fk_usuario, jogo, avatar_jogo) => {
+    execute = async(fk_usuario, jogo) => {
         let sector = await prisma.setor.findFirst({
             where: {
                 jogo
@@ -13,8 +13,7 @@ class CreateSectorService {
             sector = await prisma.setor.create({
                 data: {
                     fk_usuario,
-                    jogo,
-                    avatar_jogo
+                    jogo
                 }
             });
         } else {

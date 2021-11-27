@@ -17,6 +17,7 @@ const upload = multer({
     fileSize: 1024 * 1024 * 5,
   }
 });
+
 const ensureAuthenticated = require("./middleware/ensureAuthenticated");
 
 const CreateUserController = require("./controllers/UserController/CreateUserController");
@@ -38,6 +39,8 @@ const ListLogDiscoByLogController = require("./controllers/LogController/ListLog
 const ListDiscoByMachineController = require("./controllers/MachineController/ListDiscoByMachinesController");
 const CreateFuncController = require("./controllers/UserController/CreateFuncController");
 const ListMachinesByIdController = require("./controllers/MachineController/ListMachineByIdController");
+const UpdateSectorController = require("./controllers/SectorController/UpdateSectorController");
+const UpdatePhotoUserController = require("./controllers/UserController/UpdatePhotoUserController");
 
 router.get("/", function (req, res, next) {
   res.status(200).send({
@@ -60,7 +63,8 @@ router.post(
   ensureAuthenticated,
   new CreateFuncController().handle
 );
-router.post("/update", ensureAuthenticated, new UpdateUserController().handle);
+router.put("/update", ensureAuthenticated, new UpdateUserController().handle);
+router.put("/upload/user/:idUser", upload.single("productImage"), new UpdatePhotoUserController().handle);
 router.post("/authenticate", new AuthenticateUserController().handle);
 router.put(
   "/delete/:idUser",
@@ -83,9 +87,14 @@ router.get(
 
 router.post(
   "/sectors/create",
-  upload.single("productImage"),
   ensureAuthenticated,
   new CreateSectorController().handle
+);
+
+router.put(
+  "/sectors/upload/:idSector",
+  upload.single("productImage"),
+  new UpdateSectorController().handle
 );
 
 //machines
