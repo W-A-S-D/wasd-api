@@ -45,7 +45,7 @@ npx prisma db pull
 
 
 
-## Rodando a api com npm:
+## ✔ Rodando a api com npm:
 
 ```
 npm run dev
