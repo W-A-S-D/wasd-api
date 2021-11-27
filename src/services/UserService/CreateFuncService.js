@@ -6,7 +6,8 @@ class CreateFuncService {
 
         let user = await prisma.usuario.findFirst({
             where: {
-                email
+                email,
+                nome
             }
         })
 

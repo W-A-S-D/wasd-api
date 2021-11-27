@@ -1,7 +1,8 @@
 let prisma = require("../../prisma")
+let bcrypt = require("bcryptjs");
 
 class UpdateUserService {
-    async execute(idUser, nome, avatar, email, senha) {
+    async execute(idUser, email, senha) {
         const passwordHash = await bcrypt.hash(senha, 8)
 
         const user = await prisma.usuario.update({
@@ -9,10 +10,8 @@ class UpdateUserService {
                 usuario_id: idUser
             },
             data: {
-                nome,
                 email,
-                senha: passwordHash,
-                avatar
+                senha: passwordHash
             }
         })
 
