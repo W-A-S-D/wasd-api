@@ -3,19 +3,19 @@ let router = express.Router();
 const multer = require("multer");
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./uploads");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+    destination: function(req, file, cb) {
+        cb(null, "./uploads");
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    },
 });
 
 const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 1024 * 1024 * 5,
-  }
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5,
+    }
 });
 
 const ensureAuthenticated = require("./middleware/ensureAuthenticated");
@@ -29,6 +29,7 @@ const ListMachinesBySectorController = require("./controllers/MachineController/
 const ListMachinesByStatusController = require("./controllers/MachineController/ListMachinesByStatusController");
 const CreateSectorController = require("./controllers/SectorController/CreateSectorController");
 const ListUsersController = require("./controllers/UserController/ListUsersController");
+const ListUsersWithoutSector = require("./controllers/UserController/ListUsersWithoutSectorController");
 const ListSectorsByCompanyController = require("./controllers/SectorController/ListSectorsByCompanyController");
 const DeleteUserController = require("./controllers/UserController/DeleteUserController");
 const UpdateUserController = require("./controllers/UserController/UpdateUserController");
@@ -41,49 +42,55 @@ const CreateFuncController = require("./controllers/UserController/CreateFuncCon
 const ListMachinesByIdController = require("./controllers/MachineController/ListMachineByIdController");
 const UpdateSectorController = require("./controllers/SectorController/UpdateSectorController");
 const UpdatePhotoUserController = require("./controllers/UserController/UpdatePhotoUserController");
+const ListRequestController = require("./controllers/RequestController/ListRequestController");
+const UpdateRequestController = require("./controllers/RequestController/UpdateRequestController");
 
-router.get("/", function (req, res, next) {
-  res.status(200).send({
-    title: "Node Express API",
-    version: "0.0.1"
-  });
+
+router.get("/", function(req, res, next) {
+    res.status(200).send({
+        title: "Node Express API",
+        version: "0.0.1"
+    });
 });
 
 //users
 router.get("/users", new ListUsersController().handle);
 router.get(
-  "/users/company",
-  ensureAuthenticated,
-  new ListUsersByCompanyController().handle
+    "/users/company",
+    ensureAuthenticated,
+    new ListUsersByCompanyController().handle
 );
 router.get("/user", ensureAuthenticated, new FindUserByIdController().handle);
 router.post("/create", new CreateUserController().handle);
+router.get('/users/nosector', new ListUsersWithoutSector().handle);
 router.post(
-  "/create/func",
-  ensureAuthenticated,
-  new CreateFuncController().handle
+    "/create/func",
+    ensureAuthenticated,
+    new CreateFuncController().handle
 );
 router.put("/update", ensureAuthenticated, new UpdateUserController().handle);
 router.put("/upload/user/:idUser", upload.single("productImage"), new UpdatePhotoUserController().handle);
 router.post("/authenticate", new AuthenticateUserController().handle);
 router.put(
-  "/delete/:idUser",
-  ensureAuthenticated,
-  new DeleteUserController().handle
+    "/delete/:idUser",
+    ensureAuthenticated,
+    new DeleteUserController().handle
 );
 
 // sectors
 router.get("/sectors", new ListSectorsController().handle);
 router.get(
-  "/sectors/user",
-  ensureAuthenticated,
-  new FindSectorByUserController().handle
+    "/sectors/user",
+    ensureAuthenticated,
+    new FindSectorByUserController().handle
 );
 router.get(
-  "/sectors/company",
-  ensureAuthenticated,
-  new ListSectorsByCompanyController().handle
+    "/sectors/company",
+    ensureAuthenticated,
+    new ListSectorsByCompanyController().handle
 );
+
+
 
 router.post(
   "/sectors/create",
@@ -99,39 +106,46 @@ router.put(
 
 //machines
 router.get(
-  "/machines/sector/:idSetor",
-  new ListMachinesBySectorController().handle
+    "/machines/sector/:idSetor",
+    new ListMachinesBySectorController().handle
 );
 
 router.get(
-  "/machines/",
-  ensureAuthenticated,
-  new ListMachinesByStatusController().handle
+    "/machines/",
+    ensureAuthenticated,
+    new ListMachinesByStatusController().handle
 );
 router.get(
-  "/discos/:idMaquina",
-  ensureAuthenticated,
-  new ListDiscoByMachineController().handle
+    "/discos/:idMaquina",
+    ensureAuthenticated,
+    new ListDiscoByMachineController().handle
 );
 router.get(
-  "/machine/:idMaquina",
-  ensureAuthenticated,
-  new ListMachinesByIdController().handle
+    "/machine/:idMaquina",
+    ensureAuthenticated,
+    new ListMachinesByIdController().handle
 );
 
 //log
 router.get(
-  "/log/:idMaquina",
-  ensureAuthenticated,
-  new ListLogByMachineController().handle
+    "/log/:idMaquina",
+    ensureAuthenticated,
+    new ListLogByMachineController().handle
 );
 router.get(
-  "/logDisco/:idLog&:idDisco",
-  ensureAuthenticated,
-  new ListLogDiscoByLogController().handle
+    "/logDisco/:idLog&:idDisco",
+    ensureAuthenticated,
+    new ListLogDiscoByLogController().handle
 );
 
 //company
 router.post("/create/company", new CreateCompanyController().handle);
+
+//requests
+router.get('/requests', new ListRequestController().handle);
+
+router.put('/request/update', new UpdateRequestController().handle);
+
+
 
 module.exports = router;
