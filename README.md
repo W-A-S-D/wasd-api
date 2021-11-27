@@ -31,6 +31,20 @@ Instale as dependências:
 npm i
 ```
 
+Gere o prisma client:
+
+```
+npx prisma generate 
+```
+
+Obs: Caso seu schema esteja desatualizado:
+
+```
+npx prisma db pull
+```
+
+
+
 ## Rodando a api com npm:
 
 ```
