@@ -142,7 +142,7 @@ router.get(
 router.post("/create/company", new CreateCompanyController().handle);
 
 //requests
-router.get('/requests', new ListRequestController().handle);
+router.get('/requests', ensureAuthenticated, new ListRequestController().handle);
 
 router.put('/request/update', new UpdateRequestController().handle);
 

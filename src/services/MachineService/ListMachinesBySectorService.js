@@ -2,6 +2,7 @@ const prisma = require("../../prisma");
 
 class ListMachinesBySectorService {
     async execute(idSetor) {
+        
         const machinesList = await prisma.maquina.findMany({
             where: {
                 fk_setor: idSetor

@@ -8,7 +8,7 @@ class UpdateRequestController {
         const service = new UpdateRequestService();
 
         try {
-            let result = await service.execute(id, status);
+            let result = await service.execute(parseInt(id), parseInt(status));
             return response.json(result);
 
         } catch (error) {

@@ -4,12 +4,12 @@ let ListRequestService = require('../../services/RequestService/ListRequestServi
 class ListRequestController {
     handle = async(request, response) => {
 
-        const { id } = request;
-
+        const { user_id }  = request;
+        
         const service = new ListRequestService();
 
         try {
-            const result = await service.execute(id);
+            const result = await service.execute(parseInt(user_id));
 
             return response.json(result);
         } catch (error) {
