@@ -1,8 +1,12 @@
 const prisma = require("../../prisma");
 
 class ListRequestService {
-    execute = async() => {
-        const requestList = await prisma.pedido.findMany();
+    execute = async(fk_usuario) => {
+        const requestList = await prisma.pedido.findMany({
+            where: {
+                fk_usuario
+            }
+        });
 
         if (!requestList) {
             throw new Error("Impossible to reach")
