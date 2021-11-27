@@ -31,7 +31,7 @@ Instale as dependências:
 npm i
 ```
 
-Gere o prisma client:
+## 👾 Gere o prisma client:
 
 ```
 npx prisma generate 
