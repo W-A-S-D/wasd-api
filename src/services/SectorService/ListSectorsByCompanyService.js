@@ -1,5 +1,6 @@
 let prisma = require("../../prisma")
 const FindUserByIdService = require("../UserService/FindUserByIdService");
+const FindSectorStatusByMachinesService = require("./FindSectorStatusByMachinesService");
 
 class ListSectorsByCompanyService {
     execute = async(user_id) => {
@@ -30,7 +31,19 @@ class ListSectorsByCompanyService {
             throw new Error("Impossible to reach")
         }
 
-        return sectorsList;
+        const newList = await Promise.all(sectorsList.map(async (s) => (
+            {
+                setor_id: s.setor_id,
+                jogo: s.jogo,
+                nome: s.usuario.nome,
+                avatar: s.avatar_jogo,
+                status: await new FindSectorStatusByMachinesService().execute(s.setor_id)
+            }
+        )))
+
+        console.log(newList)
+
+        return newList;
 
     }
 }

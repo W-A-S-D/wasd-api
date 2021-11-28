@@ -45,7 +45,6 @@ const UpdatePhotoUserController = require("./controllers/UserController/UpdatePh
 const ListRequestController = require("./controllers/RequestController/ListRequestController");
 const UpdateRequestController = require("./controllers/RequestController/UpdateRequestController");
 
-
 router.get("/", function(req, res, next) {
     res.status(200).send({
         title: "Node Express API",
@@ -115,6 +114,7 @@ router.get(
     ensureAuthenticated,
     new ListMachinesByStatusController().handle
 );
+
 router.get(
     "/discos/:idMaquina",
     ensureAuthenticated,
