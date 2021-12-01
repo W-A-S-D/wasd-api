@@ -8,7 +8,7 @@ class CreateUserController {
 
         console.log(request.body);
         try {
-            const result = await service.execute(fk_empresa, nome, email, pass);
+            const result = await service.execute(parseInt(fk_empresa), nome, email, pass);
 
             return response.json(result);
         } catch (error) {
