@@ -133,8 +133,7 @@ router.get(
     new ListLogByMachineController().handle
 );
 router.get(
-    "/logDisco/:idLog&:idDisco",
-    ensureAuthenticated,
+    "/logDisco/:idDisco",
     new ListLogDiscoByLogController().handle
 );
 

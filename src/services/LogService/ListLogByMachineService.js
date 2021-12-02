@@ -3,6 +3,10 @@ const prisma = require("../../prisma");
 class ListLogByMachineService {
     async execute(idMachine) {
         const log = await prisma.log.findMany({
+            take: 10,
+            orderBy: {
+              criado: "desc",
+            },
             where: {
                 fk_maquina: idMachine
             },

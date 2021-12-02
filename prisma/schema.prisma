@@ -8,16 +8,16 @@ datasource db {
 }
 
 model disco {
-  disco_id   Int         @id(map: "PK__disco__E0E790268C4678AB") @default(autoincrement())
+  disco_id   Int         @id(map: "PK__disco__E0E79026A24A25C3") @default(autoincrement())
   fk_maquina Int
   nome       String      @db.VarChar(100)
   volume     Decimal     @db.Decimal(6, 2)
-  maquina    maquina     @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__disco__fk_maquin__5F7E2DAC")
+  maquina    maquina     @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__disco__fk_maquin__0D44F85C")
   log_disco  log_disco[]
 }
 
 model empresa {
-  empresa_id        Int       @id(map: "PK__empresa__536BE4A25FF34EB0") @default(autoincrement())
+  empresa_id        Int       @id(map: "PK__empresa__536BE4A2EFDDA04C") @default(autoincrement())
   nome              String    @db.VarChar(100)
   email_empresarial String?   @db.VarChar(50)
   cnpj              String    @db.Char(14)
@@ -32,80 +32,81 @@ model empresa {
 }
 
 model log {
-  log_id      Int         @id(map: "PK__log__9E2397E027AF3983") @default(autoincrement())
+  log_id      Int         @id(map: "PK__log__9E2397E0C1A04A85") @default(autoincrement())
   fk_maquina  Int
   freq_cpu    Decimal     @db.Decimal(6, 2)
   uso_ram     Decimal     @db.Decimal(6, 2)
   temperatura Decimal     @db.Decimal(6, 2)
-  criado      DateTime?   @default(now(), map: "DF__log__criado__625A9A57")
-  maquina     maquina     @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__log__fk_maquina__634EBE90")
+  criado      DateTime?   @default(now(), map: "DF__log__criado__10216507")
+  maquina     maquina     @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__log__fk_maquina__11158940")
   log_disco   log_disco[]
 }
 
 model log_disco {
   fk_log    Int
   fk_disco  Int
-  uso_disco Decimal @db.Decimal(6, 2)
-  disco     disco   @relation(fields: [fk_disco], references: [disco_id], onUpdate: NoAction, map: "FK__log_disco__fk_di__671F4F74")
-  log       log     @relation(fields: [fk_log], references: [log_id], onUpdate: NoAction, map: "FK__log_disco__fk_lo__662B2B3B")
+  uso_disco Decimal   @db.Decimal(6, 2)
+  criado    DateTime? @default(now(), map: "DF__log_disco__criad__19AACF41")
+  disco     disco     @relation(fields: [fk_disco], references: [disco_id], onUpdate: NoAction, map: "FK__log_disco__fk_di__14E61A24")
+  log       log       @relation(fields: [fk_log], references: [log_id], onUpdate: NoAction, map: "FK__log_disco__fk_lo__13F1F5EB")
 
-  @@id([fk_log, fk_disco], map: "PK__log_disc__880D6FD9DEDE9A82")
+  @@id([fk_log, fk_disco], map: "PK__log_disc__880D6FD930C61370")
 }
 
 model maquina {
-  maquina_id Int        @id(map: "PK__maquina__2013A8F6DEF43EC4") @default(autoincrement())
+  maquina_id Int        @id(map: "PK__maquina__2013A8F67FEA856F") @default(autoincrement())
   fk_setor   Int
   nome       String     @db.VarChar(30)
-  so         String?    @db.VarChar(20)
+  so         String     @db.VarChar(20)
   cpu        String     @db.VarChar(50)
   ram        Decimal    @db.Decimal(6, 2)
   gpu        String?    @db.VarChar(50)
   status     String     @db.VarChar(20)
-  setor      setor      @relation(fields: [fk_setor], references: [setor_id], onUpdate: NoAction, map: "FK__maquina__fk_seto__47A6A41B")
+  setor      setor      @relation(fields: [fk_setor], references: [setor_id], onUpdate: NoAction, map: "FK__maquina__fk_seto__03BB8E22")
   disco      disco[]
   log        log[]
   processo   processo[]
 }
 
 model pedido {
-  pedido_id  Int     @id(map: "PK__pedido__CBE76076FB8415A9") @default(autoincrement())
+  pedido_id  Int     @id(map: "PK__pedido__CBE76076077003FC") @default(autoincrement())
   hostname   String  @db.VarChar(25)
   status     Int
   fk_usuario Int
-  usuario    usuario @relation(fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__pedido__fk_usuar__58D1301D")
+  usuario    usuario @relation(fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__pedido__fk_usuar__0A688BB1")
 }
 
 model processo {
-  processo_id Int       @id(map: "PK__processo__E875D8448238D8E2") @default(autoincrement())
+  processo_id Int       @id(map: "PK__processo__E875D844B130BC9E") @default(autoincrement())
   fk_maquina  Int
   nome        String    @db.VarChar(30)
   usoCpu      Float
   usoMemoria  Float
-  iniciado    DateTime? @default(now(), map: "DF__processo__inicia__7755B73D")
+  iniciado    DateTime? @default(now(), map: "DF__processo__inicia__0697FACD")
   atualizado  DateTime?
-  maquina     maquina   @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__processo__fk_maq__7849DB76")
+  maquina     maquina   @relation(fields: [fk_maquina], references: [maquina_id], onUpdate: NoAction, map: "FK__processo__fk_maq__078C1F06")
 }
 
 model setor {
-  setor_id    Int       @id(map: "PK__setor__F82C2031FF5BB802") @default(autoincrement())
+  setor_id    Int       @id(map: "PK__setor__F82C2031EF7CC443") @default(autoincrement())
   fk_usuario  Int
   jogo        String    @db.VarChar(50)
   avatar_jogo String?   @db.VarChar(255)
-  usuario     usuario   @relation(fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__setor__fk_usuari__22751F6C")
+  usuario     usuario   @relation(fields: [fk_usuario], references: [usuario_id], onUpdate: NoAction, map: "FK__setor__fk_usuari__00DF2177")
   maquina     maquina[]
 }
 
 model usuario {
-  usuario_id  Int       @id(map: "PK__usuario__2ED7D2AF82F25FFB") @default(autoincrement())
+  usuario_id  Int       @id(map: "PK__usuario__2ED7D2AF3212571A") @default(autoincrement())
   fk_empresa  Int
   nome        String    @db.VarChar(100)
   email       String    @db.VarChar(100)
   senha       String    @db.VarChar(255)
   nivelAcesso Int
   avatar      String?   @db.VarChar(255)
-  criado      DateTime? @default(now(), map: "DF__usuario__criado__1EA48E88")
+  criado      DateTime? @default(now(), map: "DF__usuario__criado__7D0E9093")
   atualizado  DateTime?
-  empresa     empresa   @relation(fields: [fk_empresa], references: [empresa_id], onUpdate: NoAction, map: "FK__usuario__fk_empr__1F98B2C1")
+  empresa     empresa   @relation(fields: [fk_empresa], references: [empresa_id], onUpdate: NoAction, map: "FK__usuario__fk_empr__7E02B4CC")
   pedido      pedido[]
   setor       setor[]
 }
