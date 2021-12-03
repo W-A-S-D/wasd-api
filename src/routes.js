@@ -134,7 +134,7 @@ router.get(
     ensureAuthenticated,
     new ListLogByMachineController().handle
 );
-router.get(
+router.post(
   "/log/data/:idMaquina",
   new ListLogByDataController().handle
 );
@@ -142,7 +142,7 @@ router.get(
     "/logDisco/:idDisco",
     new ListLogDiscoByLogController().handle
 );
-router.get(
+router.post(
   "/logDisco/data/:idDisco",
   new ListLogDiscoByDataController().handle
 );
