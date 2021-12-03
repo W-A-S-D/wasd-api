@@ -44,6 +44,8 @@ const UpdateSectorController = require("./controllers/SectorController/UpdateSec
 const UpdatePhotoUserController = require("./controllers/UserController/UpdatePhotoUserController");
 const ListRequestController = require("./controllers/RequestController/ListRequestController");
 const UpdateRequestController = require("./controllers/RequestController/UpdateRequestController");
+const ListLogByDataController = require("./controllers/LogController/ListLogByDataController");
+const ListLogDiscoByDataController = require("./controllers/LogController/ListLogDiscoByDataController");
 
 router.get("/", function(req, res, next) {
     res.status(200).send({
@@ -133,8 +135,16 @@ router.get(
     new ListLogByMachineController().handle
 );
 router.get(
+  "/log/data/:idMaquina",
+  new ListLogByDataController().handle
+);
+router.get(
     "/logDisco/:idDisco",
     new ListLogDiscoByLogController().handle
+);
+router.get(
+  "/logDisco/data/:idDisco",
+  new ListLogDiscoByDataController().handle
 );
 
 //company
